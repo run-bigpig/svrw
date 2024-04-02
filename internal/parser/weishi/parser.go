@@ -21,11 +21,11 @@ type Parser struct {
 	result []byte
 }
 
-func NewParser(url string) Parser {
-	return Parser{url: url}
+func NewParser(url string) *Parser {
+	return &Parser{url: url}
 }
 
-func (p Parser) Parse() (*parser.ParseResult, error) {
+func (p *Parser) Parse() (*parser.ParseResult, error) {
 	loc, err := utils.GetHeadersLocation(p.url)
 	if err != nil {
 		return nil, err
@@ -49,7 +49,7 @@ func (p Parser) Parse() (*parser.ParseResult, error) {
 	return p.parseResult()
 }
 
-func (p Parser) parseResult() (*parser.ParseResult, error) {
+func (p *Parser) parseResult() (*parser.ParseResult, error) {
 	var result Response
 	if len(p.result) == 0 {
 		return nil, errors.New("result is nil")
@@ -72,14 +72,14 @@ func (p Parser) parseResult() (*parser.ParseResult, error) {
 }
 
 // 处理videoUrl
-func (p Parser) handleVideoUrl(videoUrl string) string {
+func (p *Parser) handleVideoUrl(videoUrl string) string {
 	if strings.Count(videoUrl, "v.weishi.qq.com") > 1 {
 		return strings.Replace(videoUrl, "v.weishi.qq.com/v.weishi.qq.com", "v.weishi.qq.com", 1)
 	}
 	return videoUrl
 }
 
-func (p Parser) extractScriptContents(body []byte) (string, error) {
+func (p *Parser) extractScriptContents(body []byte) (string, error) {
 	if len(body) == 0 {
 		return "", errors.New("body is nil")
 	}
@@ -98,7 +98,7 @@ func (p Parser) extractScriptContents(body []byte) (string, error) {
 }
 
 // 解析script内容
-func (p Parser) parseScriptContent(scriptContent string) ([]byte, error) {
+func (p *Parser) parseScriptContent(scriptContent string) ([]byte, error) {
 	vm := goja.New()
 	if _, err := vm.RunString(scriptContent); err != nil {
 		return nil, err

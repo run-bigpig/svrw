@@ -17,11 +17,11 @@ type Parser struct {
 	result []byte
 }
 
-func NewParser(url string) Parser {
-	return Parser{url: url}
+func NewParser(url string) *Parser {
+	return &Parser{url: url}
 }
 
-func (p Parser) Parse() (*parser.ParseResult, error) {
+func (p *Parser) Parse() (*parser.ParseResult, error) {
 	itemId, err := p.getItemId()
 	if err != nil {
 		return nil, err
@@ -35,7 +35,7 @@ func (p Parser) Parse() (*parser.ParseResult, error) {
 }
 
 // 解析url地址
-func (p Parser) getItemId() (string, error) {
+func (p *Parser) getItemId() (string, error) {
 	loc, err := utils.GetHeadersLocation(p.url)
 	if err != nil {
 		return "", err
@@ -49,7 +49,7 @@ func (p Parser) getItemId() (string, error) {
 }
 
 // 解析结果
-func (p Parser) parseResult() (*parser.ParseResult, error) {
+func (p *Parser) parseResult() (*parser.ParseResult, error) {
 	var result Response
 	if len(p.result) == 0 {
 		return nil, errors.New("result is nil")

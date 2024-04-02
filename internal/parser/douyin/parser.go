@@ -28,11 +28,11 @@ type Parser struct {
 	result []byte
 }
 
-func NewParser(url string) Parser {
-	return Parser{url: url, header: make(map[string]string)}
+func NewParser(url string) *Parser {
+	return &Parser{url: url, header: make(map[string]string)}
 }
 
-func (p Parser) Parse() (*parser.ParseResult, error) {
+func (p *Parser) Parse() (*parser.ParseResult, error) {
 	itemId, err := p.getItemId()
 	if err != nil {
 		return nil, err
@@ -51,7 +51,7 @@ func (p Parser) Parse() (*parser.ParseResult, error) {
 	return p.parseResult()
 }
 
-func (p Parser) getItemId() (string, error) {
+func (p *Parser) getItemId() (string, error) {
 	loc, err := utils.GetHeadersLocation(p.url)
 	if err != nil {
 		return "", err
@@ -64,7 +64,7 @@ func (p Parser) getItemId() (string, error) {
 	return slice[1], nil
 }
 
-func (p Parser) sign(urlApi, userAgent string) (string, error) {
+func (p *Parser) sign(urlApi, userAgent string) (string, error) {
 	u, err := url.Parse(urlApi)
 	if err != nil {
 		return "", err
@@ -86,7 +86,7 @@ func (p Parser) sign(urlApi, userAgent string) (string, error) {
 	return xbogus, nil
 }
 
-func (p Parser) openJSFile(filePath string) string {
+func (p *Parser) openJSFile(filePath string) string {
 	file, err := os.Open(filePath)
 	if err != nil {
 		return ""
@@ -107,7 +107,7 @@ func (p Parser) openJSFile(filePath string) string {
 }
 
 // 组装请求参数
-func (p Parser) getQueryParams() {
+func (p *Parser) getQueryParams() {
 	msToken := utils.SubStr(utils.StrShuffle(RandStr), 0, 107)
 	ttwid, err := p.getttwid()
 	if err != nil {
@@ -119,7 +119,7 @@ func (p Parser) getQueryParams() {
 }
 
 // 解析结果
-func (p Parser) parseResult() (*parser.ParseResult, error) {
+func (p *Parser) parseResult() (*parser.ParseResult, error) {
 	var data Response
 	if len(p.result) == 0 {
 		return nil, errors.New("result is nil")
@@ -144,7 +144,7 @@ func (p Parser) parseResult() (*parser.ParseResult, error) {
 }
 
 // 获取ttwid
-func (p Parser) getttwid() (string, error) {
+func (p *Parser) getttwid() (string, error) {
 	ttwidurl := "https://ttwid.bytedance.com/ttwid/union/register/"
 	data := TTWidRequest{
 		Region:  "cn",
