@@ -45,7 +45,7 @@ http://localhost:8080?url=https://v.douyin.com/iYdNyd34/
 
 如果您对该项目有任何建议或发现了 Bug，欢迎提交 Issue 或 Pull Request。
 
-## 许可证
+## 免责声明
 
-本项目采用 [MIT 许可证](LICENSE) 进行许可。
+本仓库只为学习研究，如涉及侵犯个人或者团体利益，请与我取得联系，我将主动删除一切相关资料，谢谢！
 
