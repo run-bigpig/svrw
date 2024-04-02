@@ -7,6 +7,7 @@ import (
 
 func NewRouter() *router.Router {
 	r := router.New()
-	r.GET("/", handler.ParseHandler)
+	r.GET("/", handler.IndexHandler)
+	r.GET("/api", handler.ParseHandler)
 	return r
 }

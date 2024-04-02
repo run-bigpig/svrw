@@ -46,7 +46,7 @@ go build -o svrw cmd/main.go
 
 ### 获取短视频无平台水印
 ```
-http://localhost:8080?url=https://v.douyin.com/iYdNyd34/
+http://localhost:8080/api?url=https://v.douyin.com/iYdNyd34/
 ```
 
 ### 目前支持的平台

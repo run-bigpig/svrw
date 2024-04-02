@@ -1,11 +1,11 @@
 {
   "version": 2,
   "functions": {
-    "severless/severless.go": {
+    "api/severless.go": {
       "maxDuration": 5
     }
   },
   "routes": [
-    { "src": "/", "dest": "severless/severless.go" }
+    { "src": "/api", "dest": "api/severless.go" }
   ]
 }
