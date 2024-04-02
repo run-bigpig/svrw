@@ -3,12 +3,8 @@ package handler
 import (
 	"errors"
 	"github.com/run-bigpig/svrw/internal/parser"
-	"github.com/run-bigpig/svrw/internal/parser/douyin"
-	"github.com/run-bigpig/svrw/internal/parser/pipixia"
-	"github.com/run-bigpig/svrw/internal/parser/weishi"
 	"github.com/run-bigpig/svrw/internal/response"
 	"github.com/valyala/fasthttp"
-	"strings"
 )
 
 func ParseHandler(ctx *fasthttp.RequestCtx) {
@@ -17,7 +13,7 @@ func ParseHandler(ctx *fasthttp.RequestCtx) {
 		response.Error(ctx, errors.New("url is required"))
 		return
 	}
-	p, err := loadParser(string(parseUrl))
+	p, err := parser.LoadParser(string(parseUrl))
 	if err != nil {
 		response.Error(ctx, err)
 		return
@@ -28,17 +24,4 @@ func ParseHandler(ctx *fasthttp.RequestCtx) {
 		return
 	}
 	response.Success(ctx, result)
-}
-
-func loadParser(url string) (parser.Parser, error) {
-	switch {
-	case strings.Contains(url, "weishi"):
-		return weishi.NewParser(url), nil
-	case strings.Contains(url, "pipix"):
-		return pipixia.NewParser(url), nil
-	case strings.Contains(url, "douyin"):
-		return douyin.NewParser(url), nil
-	default:
-		return nil, errors.New("not support")
-	}
 }
