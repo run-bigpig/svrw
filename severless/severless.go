@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func ServerLess(w http.ResponseWriter, r *http.Request) {
+func Handler(w http.ResponseWriter, r *http.Request) {
 	url := r.URL.Query().Get("url")
 	if url == "" {
 		w.Write([]byte("url is required"))
