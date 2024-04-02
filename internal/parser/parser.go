@@ -1,5 +1,7 @@
 package parser
 
+import "encoding/json"
+
 type Data struct {
 	Author string `json:"author"`
 	Avatar string `json:"avatar"`
@@ -10,10 +12,17 @@ type Data struct {
 }
 
 type ParseResult struct {
-	Code int   `json:"code"`
-	Data *Data `json:"data"`
+	*Data
 }
 
 type Parser interface {
 	Parse() (*ParseResult, error)
+}
+
+func (pr *ParseResult) ToJson() []byte {
+	jsonData, err := json.Marshal(pr)
+	if err != nil {
+		return nil
+	}
+	return jsonData
 }
