@@ -2,17 +2,15 @@
   "version": 2,
   "builds": [
     {
-      "src": "Dockerfile",
-      "use": "@vercel/static-build"
+      "src": "./main.go",
+      "use": "@vercel/go",
+      "config": {
+        "version": "1.19"
+      }
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/"
-    }
-  ],
+  "outputDirectory": "bin",
   "env": {
-    "PORT": "8080"
+    "GO_ENV": "production"
   }
 }
