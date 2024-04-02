@@ -1,8 +1,11 @@
 {
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/serverless/serverless.go"
+  "version": 2,
+  "functions": {
+    "severless/severless.go": {
+      "maxDuration": 5
     }
+  },
+  "routes": [
+    { "src": "/", "dest": "severless/severless.go" }
   ]
 }
