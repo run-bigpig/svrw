@@ -70,7 +70,7 @@ func (p Parser) sign(urlApi, userAgent string) (string, error) {
 		return "", err
 	}
 	vm := goja.New()
-	if _, err := vm.RunString(p.openJSFile("./x.js")); err != nil {
+	if _, err := vm.RunString(Xbogus); err != nil {
 		return "", err
 	}
 
