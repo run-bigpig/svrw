@@ -6,6 +6,7 @@ import (
 	"github.com/run-bigpig/svrw/internal/parser/douyin"
 	"github.com/run-bigpig/svrw/internal/parser/pipixia"
 	"github.com/run-bigpig/svrw/internal/parser/weishi"
+	"github.com/run-bigpig/svrw/internal/response"
 	"github.com/valyala/fasthttp"
 	"strings"
 )
@@ -13,22 +14,20 @@ import (
 func ParseHandler(ctx *fasthttp.RequestCtx) {
 	parseUrl := ctx.QueryArgs().Peek("url")
 	if len(parseUrl) == 0 {
-		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		response.Error(ctx, errors.New("url is required"))
 		return
 	}
 	p, err := loadParser(string(parseUrl))
 	if err != nil {
-		ctx.SetStatusCode(fasthttp.StatusBadRequest)
+		response.Error(ctx, err)
 		return
 	}
 	result, err := p.Parse()
 	if err != nil {
-		ctx.SetStatusCode(fasthttp.StatusInternalServerError)
+		response.Error(ctx, err)
 		return
 	}
-	ctx.SetContentType("application/json")
-	ctx.SetStatusCode(fasthttp.StatusOK)
-	ctx.SetBody(result.ToJson())
+	response.Success(ctx, result)
 }
 
 func loadParser(url string) (parser.Parser, error) {
