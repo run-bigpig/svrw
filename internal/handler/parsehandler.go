@@ -2,7 +2,7 @@ package handler
 
 import (
 	"errors"
-	"github.com/run-bigpig/svrw/internal/parser"
+	"github.com/run-bigpig/svrw/internal/load"
 	"github.com/run-bigpig/svrw/internal/response"
 	"github.com/valyala/fasthttp"
 )
@@ -13,7 +13,7 @@ func ParseHandler(ctx *fasthttp.RequestCtx) {
 		response.Error(ctx, errors.New("url is required"))
 		return
 	}
-	p, err := parser.LoadParser(string(parseUrl))
+	p, err := load.LoadParser(string(parseUrl))
 	if err != nil {
 		response.Error(ctx, err)
 		return

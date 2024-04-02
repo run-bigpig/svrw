@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/run-bigpig/svrw/internal/parser"
+	"github.com/run-bigpig/svrw/internal/load"
 	"net/http"
 )
 
@@ -11,7 +11,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("url is required"))
 		return
 	}
-	p, err := parser.LoadParser(url)
+	p, err := load.LoadParser(url)
 	if err != nil {
 		w.Write([]byte(err.Error()))
 		return
