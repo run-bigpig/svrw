@@ -2,6 +2,20 @@
 
 该项目是一个基于Go开发,获取短视频无平台水印的demo。
 
+## 快速开始
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/run-bigpig/svrw)
+
+1. 点击上方按钮，跳转至 `Vercel` 进行部署。
+
+2. 输入一个你喜欢的 `Vercel` 项目名称并点击 `Create` 继续:
+
+3. 此时 `Vercel` 会基于 `svrw` 模板帮助你新建并初始化仓库，仓库名为你之前输入的项目名。
+
+   一两分钟后，满屏的烟花会庆祝你部署成功。此时点击 `Go to Dashboard` 可以跳转到应用的控制台。
+
+4. 点击 `Visit` ，即可跳转到部署好的网站地址，此地址即为你的接口地址。
+
 ## 安装
 
 首先，您需要安装 Go 编程语言和相关工具。您可以从 Go 的官方网站 [https://golang.org/](https://golang.org/) 下载并安装 Go。
