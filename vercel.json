@@ -1,16 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "routes": [
     {
-      "src": "./serverless/severless.go",
-      "use": "@vercel/go",
-      "config": {
-        "version": "1.19"
-      }
+      "src": "/",
+      "dest": "/serverless/serverless.go"
     }
-  ],
-  "outputDirectory": "bin",
-  "env": {
-    "GO_ENV": "production"
-  }
+  ]
 }
