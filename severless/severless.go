@@ -1,4 +1,4 @@
-package severless
+package handler
 
 import (
 	"github.com/run-bigpig/svrw/internal/parser"
