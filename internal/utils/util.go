@@ -61,6 +61,9 @@ func SendRequestGetCookie(url string, headers map[string]string, data interface{
 	)
 	client := &http.Client{
 		Timeout: time.Second * 50,
+		CheckRedirect: func(req *http.Request, via []*http.Request) error {
+			return nil
+		},
 	}
 	if data != nil {
 		body, err := json.Marshal(data)
@@ -96,8 +99,12 @@ func SendRequestGetCookie(url string, headers map[string]string, data interface{
 
 // TimeStampToTime 时间戳转换为指定格式的时间
 func TimeStampToTime(timeStamp int64, format string) string {
-	t := time.Unix(timeStamp, 0)
-	return t.Format(format)
+	//timeStamp为毫秒级时间戳处理
+	if timeStamp < 9999999999 {
+		timeStamp = timeStamp * 1000
+	}
+	tm := time.Unix(timeStamp/1e3, 0)
+	return tm.Format(format)
 }
 
 // GetHeadersLocation 获取重定向地址

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/run-bigpig/svrw/internal/parser"
 	"github.com/run-bigpig/svrw/internal/parser/douyin"
+	"github.com/run-bigpig/svrw/internal/parser/kuaishou"
 	"github.com/run-bigpig/svrw/internal/parser/pipixia"
 	"github.com/run-bigpig/svrw/internal/parser/weishi"
 	"github.com/run-bigpig/svrw/internal/parser/zuiyou"
@@ -11,6 +12,7 @@ import (
 )
 
 func LoadParser(url string) (parser.Parser, error) {
+	url = strings.Trim(url, " ")
 	switch {
 	case strings.Contains(url, "weishi"):
 		return weishi.NewParser(url), nil
@@ -20,6 +22,8 @@ func LoadParser(url string) (parser.Parser, error) {
 		return douyin.NewParser(url), nil
 	case strings.Contains(url, "zuiyou") || strings.Contains(url, "xiaochuankeji"):
 		return zuiyou.NewParser(url), nil
+	case strings.Contains(url, "kuaishou"):
+		return kuaishou.NewParser(url), nil
 	default:
 		return nil, errors.New("not support")
 	}

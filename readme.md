@@ -37,8 +37,10 @@ http://localhost:8080/api?url=https://v.douyin.com/iYdNyd34/
 
 ### 目前支持的平台
 - [x] 抖音
+- [x] 快手
 - [x] 皮皮虾
 - [x] 微视
+- [x] 最右
 - [ ] 陆续完善中...
 
 ## 贡献
