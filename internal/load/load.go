@@ -7,6 +7,7 @@ import (
 	"github.com/run-bigpig/svrw/internal/parser/kuaishou"
 	"github.com/run-bigpig/svrw/internal/parser/pipixia"
 	"github.com/run-bigpig/svrw/internal/parser/weishi"
+	"github.com/run-bigpig/svrw/internal/parser/xigua"
 	"github.com/run-bigpig/svrw/internal/parser/zuiyou"
 	"strings"
 )
@@ -24,6 +25,9 @@ func LoadParser(url string) (parser.Parser, error) {
 		return zuiyou.NewParser(url), nil
 	case strings.Contains(url, "kuaishou"):
 		return kuaishou.NewParser(url), nil
+	case strings.Contains(url, "ixigua"):
+		return xigua.NewParser(url), nil
+
 	default:
 		return nil, errors.New("not support")
 	}

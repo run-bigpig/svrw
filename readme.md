@@ -41,6 +41,7 @@ http://localhost:8080/api?url=https://v.douyin.com/iYdNyd34/
 - [x] 皮皮虾
 - [x] 微视
 - [x] 最右
+- [x] 西瓜视频(封面地址有时效性、视频地址访问需要带referer:https://www.ixigua.com/)
 - [ ] 陆续完善中...
 
 ## 贡献

@@ -2,10 +2,12 @@ package utils
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"io"
 	"math/rand"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -138,4 +140,21 @@ func SubStr(s string, start, length int) string {
 		end = len(s)
 	}
 	return s[start:end]
+}
+
+// Base64Decode base64解码
+func Base64Decode(s string) string {
+	de, err := base64.StdEncoding.DecodeString(s)
+	if err != nil {
+		return ""
+	}
+	return string(de)
+}
+
+func StringToInt64(s string) int64 {
+	i, err := strconv.Atoi(s)
+	if err != nil {
+		return 0
+	}
+	return int64(i)
 }
