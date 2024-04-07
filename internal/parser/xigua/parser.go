@@ -95,7 +95,7 @@ func (p *Parser) parseResult() (*parser.ParseResult, error) {
 			Time:   utils.TimeStampToTime(utils.StringToInt64(result.PackerData.Video.VideoPublishTime), consts.TimeLayout),
 			Title:  result.PackerData.Video.Title,
 			Cover:  result.PackerData.Video.PosterURL,
-			Url:    utils.Base64Decode(result.PackerData.Video.VideoResource.Dash.VideoList.Video1.MainUrl),
+			Url:    utils.Base64Decode(result.PackerData.Video.VideoResource.Normal.VideoList.Video1.MainUrl),
 		},
 	}, nil
 }

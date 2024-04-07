@@ -1,10 +1,10 @@
 package xigua
 
 type VideoResource struct {
-	Dash Dash `json:"dash"`
+	Normal Normal `json:"normal"`
 }
 
-type Dash struct {
+type Normal struct {
 	VideoList VideoList `json:"video_list"`
 }
 
