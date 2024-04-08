@@ -3,6 +3,7 @@ package xigua
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"github.com/dop251/goja"
 	"github.com/run-bigpig/svrw/internal/consts"
 	"github.com/run-bigpig/svrw/internal/parser"
@@ -27,6 +28,11 @@ func NewParser(url string) *Parser {
 }
 
 func (p *Parser) Parse() (*parser.ParseResult, error) {
+	//检查url
+	err := p.checkUrl()
+	if err != nil {
+		return nil, err
+	}
 	//获取当前页面信息
 	header := map[string]string{"User-Agent": UserAgent, "Cookie": Cookie}
 	data, err := utils.SendRequest(p.url, header, nil)
@@ -44,6 +50,21 @@ func (p *Parser) Parse() (*parser.ParseResult, error) {
 		return nil, err
 	}
 	return p.parseResult()
+}
+
+func (p *Parser) checkUrl() error {
+	if strings.Contains(p.url, "v.ixigua.com") {
+		loc, err := utils.GetHeadersLocation(p.url)
+		if err != nil {
+			return err
+		}
+		paths := strings.Split(strings.Trim(loc.URL.Path, "/"), "/")
+		if len(paths) < 2 {
+			return errors.New("url error")
+		}
+		p.url = fmt.Sprintf("https://www.ixigua.com/%s", paths[len(paths)-1])
+	}
+	return nil
 }
 
 func (p *Parser) extractScriptContents(body []byte) (string, error) {
