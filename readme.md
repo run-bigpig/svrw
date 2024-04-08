@@ -26,9 +26,16 @@ go build -o svrw cmd/main.go
 
 执行以下命令来运行项目：
 ```
-./svrw -addr :8080
+./svrw
 ```
-然后，您可以在浏览器中访问 `http://localhost:8080`（默认端口）来查看项目运行情况。
+### 可选参数
+```
+-addr string
+    监听地址 (default ":10800")
+-bc string
+    哔哩哔哩的cookie (default "")
+```
+然后，您可以在浏览器中访问 `http://localhost:10800`（默认端口）来查看项目运行情况。
 
 ### 获取短视频无平台水印
 ```
@@ -42,6 +49,7 @@ http://localhost:8080/api?url=https://v.douyin.com/iYdNyd34/
 - [x] 微视
 - [x] 最右
 - [x] 西瓜视频(封面地址有时效性、视频地址访问需要带referer:https://www.ixigua.com/)
+- [x] bilibili 哔哩哔哩
 - [ ] 陆续完善中...
 
 ## 贡献
