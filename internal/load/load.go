@@ -3,6 +3,7 @@ package load
 import (
 	"errors"
 	"github.com/run-bigpig/svrw/internal/parser"
+	"github.com/run-bigpig/svrw/internal/parser/bilibili"
 	"github.com/run-bigpig/svrw/internal/parser/douyin"
 	"github.com/run-bigpig/svrw/internal/parser/kuaishou"
 	"github.com/run-bigpig/svrw/internal/parser/pipixia"
@@ -27,7 +28,8 @@ func LoadParser(url string) (parser.Parser, error) {
 		return kuaishou.NewParser(url), nil
 	case strings.Contains(url, "ixigua"):
 		return xigua.NewParser(url), nil
-
+	case strings.Contains(url, "b23.tv") || strings.Contains(url, "bilibili.com"):
+		return bilibili.NewParser(url), nil
 	default:
 		return nil, errors.New("not support")
 	}
