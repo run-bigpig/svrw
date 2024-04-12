@@ -11,6 +11,8 @@ import (
 	"time"
 )
 
+const UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
+
 func SendRequest(url string, headers map[string]string, data interface{}) ([]byte, error) {
 	var (
 		req *http.Request
@@ -111,7 +113,18 @@ func TimeStampToTime(timeStamp int64, format string) string {
 
 // GetHeadersLocation 获取重定向地址
 func GetHeadersLocation(url string) (*http.Request, error) {
-	resp, err := http.Head(url)
+	client := &http.Client{
+		Timeout: time.Second * 50,
+		CheckRedirect: func(req *http.Request, via []*http.Request) error {
+			return nil
+		},
+	}
+	req, err := http.NewRequest(http.MethodHead, url, nil)
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("User-Agent", UserAgent)
+	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}

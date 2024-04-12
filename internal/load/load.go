@@ -8,6 +8,7 @@ import (
 	"github.com/run-bigpig/svrw/internal/parser/kuaishou"
 	"github.com/run-bigpig/svrw/internal/parser/pipixia"
 	"github.com/run-bigpig/svrw/internal/parser/weishi"
+	"github.com/run-bigpig/svrw/internal/parser/xiaohongshu"
 	"github.com/run-bigpig/svrw/internal/parser/xigua"
 	"github.com/run-bigpig/svrw/internal/parser/zuiyou"
 	"strings"
@@ -28,6 +29,8 @@ func LoadParser(url string) (parser.Parser, error) {
 		return kuaishou.NewParser(url), nil
 	case strings.Contains(url, "ixigua"):
 		return xigua.NewParser(url), nil
+	case strings.Contains(url, "xhslink.com") || strings.Contains(url, "xiaohongshu.com"):
+		return xiaohongshu.NewParser(url), nil
 	case strings.Contains(url, "b23.tv") || strings.Contains(url, "bilibili.com"):
 		return bilibili.NewParser(url), nil
 	default:
