@@ -9,7 +9,9 @@
 在安装 Go 后，您需要设置好 Go 的工作目录和环境变量。请参考 Go 官方文档中的说明 [https://golang.org/doc/install](https://golang.org/doc/install)。
 
 安装完成后，您可以通过以下命令获取该项目：
-
+```
+git clone https://github.com/run-bigpig/svrw.git
+```
 
 ## 编译
 
@@ -50,6 +52,7 @@ http://localhost:8080/api?url=https://v.douyin.com/iYdNyd34/
 - [x] 最右
 - [x] 西瓜视频(封面地址有时效性、视频地址访问需要带referer:https://www.ixigua.com/)
 - [x] bilibili 哔哩哔哩
+- [x] 小红书(解析的地址有些需要下载之后才可以改后缀播放)
 - [ ] 陆续完善中...
 
 ## 贡献
