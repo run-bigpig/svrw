@@ -127,7 +127,6 @@ func (p *Parser) getPlayInfo(page Page) (*PlayResponse, error) {
 // 解析结果
 func (p *Parser) parseResult(baseInfo *BaseResponse, playInfos []*PlayResponse) (*parser.ParseResult, error) {
 	var (
-		purl    string
 		playMap = make(map[string]string)
 	)
 	for _, playInfo := range playInfos {
@@ -135,10 +134,7 @@ func (p *Parser) parseResult(baseInfo *BaseResponse, playInfos []*PlayResponse) 
 			playMap[fmt.Sprintf("part-%d", playInfo.Data.Durl[0].Page)] = playInfo.Data.Durl[0].Url
 		}
 	}
-	if len(playMap) > 0 {
-		jsonData, _ := json.Marshal(playMap)
-		purl = string(jsonData)
-	}
+
 	return &parser.ParseResult{
 		Data: &parser.Data{
 			Author: baseInfo.Data.Owner.Name,
@@ -146,7 +142,7 @@ func (p *Parser) parseResult(baseInfo *BaseResponse, playInfos []*PlayResponse) 
 			Time:   utils.TimeStampToTime(baseInfo.Data.Pubdate, consts.TimeLayout),
 			Title:  baseInfo.Data.Title,
 			Cover:  baseInfo.Data.Pic,
-			Url:    purl,
+			Url:    playMap,
 		},
 	}, nil
 

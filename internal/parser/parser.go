@@ -10,7 +10,7 @@ type Data struct {
 	Time   string `json:"time"`
 	Title  string `json:"title"`
 	Cover  string `json:"cover"`
-	Url    string `json:"url"`
+	Url    any    `json:"url"`
 }
 
 type ParseResult struct {
